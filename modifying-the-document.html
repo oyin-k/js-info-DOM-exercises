@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Exercises</title>
+</head>
+<body>
+
+  <div id="tree"></div>
+
+  
+
+  <script>
+    let data = {
+      "Fish": {
+        "trout": {},
+        "salmon": {}
+      },
+
+      "Tree": {
+        "Huge": {
+          "sequoia": {},
+          "oak": {}
+        },
+        "Flowering": {
+          "apple tree": {},
+          "magnolia": {}
+        }
+      }
+    };
+    
+    function createTree(container, data) {
+      
+      let ul = document.createElement('ul');
+      
+      container.append(ul);
+      for (let prop in data) {
+        let li = document.createElement('li');
+        li.textContent = prop;
+
+        let subUl = document.createElement('ul');
+        for(let prop2 in data[prop]) {
+          let subLi = document.createElement('li');
+          subLi.textContent = prop2;
+          
+          let subUl2 = document.createElement('ul');
+          for (let prop3 in data[prop][prop2]) {
+            let subLi2 = document.createElement('li');
+            subLi2.textContent = prop3;
+
+            subUl2.append(subLi2);
+          }
+          subLi.append(subUl2);
+          subUl.append(subLi);
+        }
+        li.append(subUl);
+        ul.append(li);
+      }
+      return ul;
+    }
+
+
+    createTree(document.getElementById('tree'), data);
+  </script>
+    
+</body>
+</html>
