@@ -29,39 +29,36 @@
         }
       }
     };
-    
-    function createTree(container, data) {
-      
+  
+
+    function createTree(elem, obj) {
+      elem.append(createTreeDom(obj));
+    }
+
+    function createTreeDom(obj) {
+      if(!Object.keys(obj).length) return;
+
       let ul = document.createElement('ul');
-      
-      container.append(ul);
-      for (let prop in data) {
+
+      for(let prop in obj) {
         let li = document.createElement('li');
-        li.textContent = prop;
+        li.innerHTML = prop;
 
-        let subUl = document.createElement('ul');
-        for(let prop2 in data[prop]) {
-          let subLi = document.createElement('li');
-          subLi.textContent = prop2;
-          
-          let subUl2 = document.createElement('ul');
-          for (let prop3 in data[prop][prop2]) {
-            let subLi2 = document.createElement('li');
-            subLi2.textContent = prop3;
+        let childrenUl = createTreeDom(obj[prop]);
 
-            subUl2.append(subLi2);
-          }
-          subLi.append(subUl2);
-          subUl.append(subLi);
+        if(childrenUl) {
+          li.append(childrenUl);
         }
-        li.append(subUl);
+
         ul.append(li);
       }
+
       return ul;
     }
 
+    let elem = document.getElementById('tree');
+    createTree(elem, data);
 
-    createTree(document.getElementById('tree'), data);
   </script>
     
 </body>
