@@ -55,11 +55,11 @@
       let lis = ul.querySelectorAll("li");
 
       for (let li of lis) {
-        if (li.children.length > 0) {
-          let liWithChildrenCount = li.querySelectorAll("li").length;
+        let liChildrenCount = li.querySelectorAll('li').length;
 
-          li.firstChild.textContent += `[ ${liWithChildrenCount} ]`;
-        }
+        if (!liChildrenCount) continue;
+
+        li.firstChild.textContent += `[ ${liChildrenCount} ]`;
       }
     </script>
   </body>
